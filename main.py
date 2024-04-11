@@ -40,12 +40,16 @@ def printHW():
 
 
 globalArrayNum = []
-with ThreadPoolExecutor(max_workers=4) as executor:
-    executor.submit(contadorDos,1,50)
-    executor.submit(contadorDos,51,100)
-    executor.submit(contadorDos,101,150)
-    executor.submit(contadorDos,151,200)
-    executor.submit(printHW)
+    
+with ThreadPoolExecutor(max_workers=2) as executor:
+    for i in range(1,201,50):
+        executor.submit(contadorDos, i, i+49 if i + 49  <= 200 else 200)
+        
+        """executor.submit(contadorDos,1,50)
+        executor.submit(contadorDos,51,100)
+        executor.submit(contadorDos,101,150)
+        executor.submit(contadorDos,151,200)"""
+        #executor.submit(printHW)
 
 tf = time.time() - t0
     
